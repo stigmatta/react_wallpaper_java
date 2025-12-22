@@ -10,6 +10,7 @@ interface ProductPreviewProps {
   price: string;
   oldPrice?: string;
   code?: string;
+  slug: string;
 }
 
 const ProductPreview: React.FC<ProductPreviewProps> = ({
@@ -18,10 +19,11 @@ const ProductPreview: React.FC<ProductPreviewProps> = ({
   price,
   oldPrice,
   code = "FOB-2045",
+  slug,
 }) => {
   return (
     <Link
-      href="/wallpapers/product"
+      href={`/wallpapers/${slug}`}
       className="flex flex-col bg-white rounded-xl w-full lg:max-w-[370px] h-full relative group no-underline"
     >
       {/* Image */}

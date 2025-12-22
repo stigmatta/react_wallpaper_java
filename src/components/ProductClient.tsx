@@ -1,12 +1,11 @@
 "use client";
 import React, { useState } from "react";
 import DimensionInput from "@/components/DimensionInput";
-import Carousel from "@/components/Carousel";
-import ProductPreview from "@/components/ProductPreview";
 import ArrowHorizontalIcon from "@/components/Media/ArrowHorizontalIcon";
 import ArrowVerticalIcon from "@/components/Media/ArrowVerticalIcon";
 import Extra from "@/components/Extra";
 import Material from "@/components/Material";
+import { WallpaperProduct } from "@/interfaces/wallpaper";
 
 const materials = [
   {
@@ -23,7 +22,11 @@ const materials = [
   },
 ];
 
-export default function ProductPage() {
+interface ProductClientProps {
+  product: WallpaperProduct;
+}
+
+const ProductClient: React.FC<ProductClientProps> = ({ product }) => {
   const [width, setWidth] = useState(90);
   const [height, setHeight] = useState(100);
   const [material, setMaterial] = useState(0);
@@ -36,7 +39,15 @@ export default function ProductPage() {
       {/* Left: Images & Description */}
       <div className="flex flex-col md:flex-row justify-between gap-x-8 lg:gap-x-16 mb-12">
         <div className="flex flex-col w-full lg:w-[600px]">
-          <div className="w-full aspect-square bg-[#D9D9D9] rounded-2xl mb-6" />
+          <img
+            src={
+              product.image?.startsWith("/")
+                ? `http://localhost:8080${product.image}`
+                : product.image
+            }
+            alt={product.name}
+            className="w-full aspect-square object-cover rounded-2xl mb-6"
+          />
           <div className="flex gap-3 w-full justify-center mb-8">
             {[...Array(5)].map((_, i) => (
               <div
@@ -48,51 +59,58 @@ export default function ProductPage() {
           <div className="mb-4 max-md:hidden">
             <div className="font-semibold text-2xl text-navy mb-2">Опис:</div>
             <div className="mb-4 text-[#2F4157] text-base">
-              Фотошпалери «Казковий ліс» — ідеальний вибір для дитячої кімнати,
-              spальні або зони відпочинку. Малюнок надрукований на
-              -високоякісному обладнанні з використанням екологічних чорнил.
-              Шпалери не вигорають на сонці, стійкі до вологи та легко миються.
+              {product.description}
             </div>
             <div className="font-semibold text-2xl text-navy mb-2 mt-6">
               Характеристики:
             </div>
             <ul className="list-none pl-1 text-[#2F4157] text-base">
-              <li>– Тип: флізелін / самоклейка / текстиль</li>
-              <li>– Щільність: 200 г/м²</li>
-              <li>– Стійкість до вологи: так</li>
+              <li>– Тип: {materials.map((m) => m.label).join(" / ")}</li>
+              <li>– Щільність: {product.density} г/м²</li>
+              <li>
+                – Стійкість до вологи: {product.waterproof ? "так" : "ні"}
+              </li>
               <li>– Клей у комплекті: за бажанням</li>
-              <li>– Рекомендована кімната: дитяча, спальня</li>
+              <li>– Рекомендована кімната: {product.rooms.join(", ")}</li>
             </ul>
           </div>
         </div>
         {/* Right: Info & Form */}
         <div className="flex-1 flex flex-col max-w">
           <h1 className="text-2xl md:text-3xl text-black font-bold leading-tight mb-2">
-            Фотошпалери багато золотистих пірїнок
+            {product.name}
           </h1>
           <div className="text-teal text-lg font-medium mb-4">
-            Артикул: FOB-2045
+            Артикул: {product.article}
           </div>
           <div className="text-2xl md:text-3xl font-black text-navy mb-6">
-            450 грн/м²
+            {product.salePrice ? (
+              <>
+                <span className="line-through text-teal mr-2">
+                  {product.basePrice} грн/м²
+                </span>
+                {product.salePrice} грн/м²
+              </>
+            ) : (
+              <>{product.basePrice} грн/м²</>
+            )}
           </div>
           <div className="mb-4 md:hidden">
             <div className="font-semibold text-2xl text-navy mb-2">Опис:</div>
             <div className="mb-4 text-[#2F4157] text-base">
-              Фотошпалери «Казковий ліс» — ідеальний вибір для дитячої кімнати,
-              spальні або зони відпочинку. Малюнок надрукований на
-              -високоякісному обладнанні з використанням екологічних чорнил.
-              Шпалери не вигорають на сонці, стійкі до вологи та легко миються.
+              {product.description}
             </div>
             <div className="font-semibold text-2xl text-navy mb-2 mt-6">
               Характеристики:
             </div>
             <ul className="list-none pl-1 text-[#2F4157] text-base">
-              <li>– Тип: флізелін / самоклейка / текстиль</li>
-              <li>– Щільність: 200 г/м²</li>
-              <li>– Стійкість до вологи: так</li>
+              <li>– Тип: {materials.map((m) => m.label).join(" / ")}</li>
+              <li>– Щільність: {product.density} г/м²</li>
+              <li>
+                – Стійкість до вологи: {product.waterproof ? "так" : "ні"}
+              </li>
               <li>– Клей у комплекті: за бажанням</li>
-              <li>– Рекомендована кімната: дитяча, спальня</li>
+              <li>– Рекомендована кімната: {product.rooms.join(", ")}</li>
             </ul>
           </div>
           <div className="border border-teal rounded-xl p-4 sm:p-6 pb-8 mb-6">
@@ -197,7 +215,7 @@ export default function ProductPage() {
           </div>
         </div>
       </div>
-      <Carousel visibleCount={5}>
+      {/* <Carousel visibleCount={5}>
         {Array.from({ length: 8 }).map((_, i) => (
           <ProductPreview
             key={i}
@@ -207,7 +225,9 @@ export default function ProductPage() {
             code="FOB-2045"
           />
         ))}
-      </Carousel>
+      </Carousel> */}
     </div>
   );
-}
+};
+
+export default ProductClient;

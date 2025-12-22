@@ -2,7 +2,8 @@
 import CategorySidebar from "@/components/CategorySidebar";
 import { Pagination } from "@mui/material";
 import ProductPreview from "@/components/ProductPreview";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { WallpaperProduct } from "@/interfaces/wallpaper";
 
 export default function WallpapersPage() {
   const categories = [
@@ -13,15 +14,36 @@ export default function WallpapersPage() {
     "ПРИРОДА",
     "КВІТИ",
   ];
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<WallpaperProduct[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    setLoading(true);
+    setError(null);
     fetch("http://localhost:8080/wallpapers")
-      .then((res) => res.json())
-      .then((data) => setProducts(data))
-      .catch((err) => console.error("Failed to fetch products:", err));
+      .then((res) => {
+        if (!res.ok) throw new Error("Network response was not ok");
+        return res.json();
+      })
+      .then((data) => {
+        // If your API returns { content: [...] }
+        if (Array.isArray(data.content)) {
+          setProducts(data.content);
+        } else if (Array.isArray(data)) {
+          setProducts(data);
+        } else {
+          setProducts([]);
+          setError("Unexpected response format");
+        }
+      })
+      .catch((err) => {
+        setError(err.message || "Failed to fetch products");
+        setProducts([]);
+      })
+      .finally(() => setLoading(false));
   }, []);
-  console.log(products);
+
   return (
     <div className="flex flex-row px-[clamp(1rem,6vw,7.5rem)] gap-y-20 xl:gap-y-30 py-4 lg:py-8">
       <CategorySidebar categories={categories} />
@@ -72,20 +94,23 @@ export default function WallpapersPage() {
           }}
           className="mb-8 lg:mb-12"
         />
+        {loading && <div>Завантаження...</div>}
+        {error && <div className="text-red-500">{error}</div>}
         <div className="grid w-full grid-cols-2 xl:grid-cols-3 gap-[clamp(1rem,2vw,2.5rem)]">
-          {products.map((product: any, idx: number) => {
+          {products.map((product, idx) => {
             const imageUrl = product.image?.startsWith("/")
               ? `http://localhost:8080${product.image}`
               : product.image;
             return (
               <ProductPreview
-                key={product.id || idx}
-                title={product.name}
+                key={product.article || idx}
+                title={product.name || product.article}
                 imageUrl={imageUrl}
                 price={`${product.basePrice} грн/м²`}
                 oldPrice={
-                  product.oldPrice ? `${product.oldPrice} грн` : undefined
+                  product.salePrice ? `${product.salePrice} грн/м²` : undefined
                 }
+                slug={product.slug}
               />
             );
           })}

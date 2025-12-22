@@ -105,9 +105,9 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$imag
 ;
 ;
 ;
-const ProductPreview = ({ imageUrl, title, price, oldPrice, code = "FOB-2045" })=>{
+const ProductPreview = ({ imageUrl, title, price, oldPrice, code = "FOB-2045", slug })=>{
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-        href: "/wallpapers/product",
+        href: `/wallpapers/${slug}`,
         className: "flex flex-col bg-white rounded-xl w-full lg:max-w-[370px] h-full relative group no-underline",
         children: [
             imageUrl ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -118,13 +118,13 @@ const ProductPreview = ({ imageUrl, title, price, oldPrice, code = "FOB-2045" })
                 className: "w-full aspect-square object-cover rounded-2xl mb-4"
             }, void 0, false, {
                 fileName: "[project]/src/components/ProductPreview.tsx",
-                lineNumber: 29,
+                lineNumber: 31,
                 columnNumber: 9
             }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "w-full aspect-square bg-mock rounded-2xl mb-4"
             }, void 0, false, {
                 fileName: "[project]/src/components/ProductPreview.tsx",
-                lineNumber: 37,
+                lineNumber: 39,
                 columnNumber: 9
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -132,7 +132,7 @@ const ProductPreview = ({ imageUrl, title, price, oldPrice, code = "FOB-2045" })
                 children: title
             }, void 0, false, {
                 fileName: "[project]/src/components/ProductPreview.tsx",
-                lineNumber: 40,
+                lineNumber: 42,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -140,7 +140,7 @@ const ProductPreview = ({ imageUrl, title, price, oldPrice, code = "FOB-2045" })
                 children: code
             }, void 0, false, {
                 fileName: "[project]/src/components/ProductPreview.tsx",
-                lineNumber: 44,
+                lineNumber: 46,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -154,7 +154,7 @@ const ProductPreview = ({ imageUrl, title, price, oldPrice, code = "FOB-2045" })
                                 children: oldPrice
                             }, void 0, false, {
                                 fileName: "[project]/src/components/ProductPreview.tsx",
-                                lineNumber: 51,
+                                lineNumber: 53,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -162,13 +162,13 @@ const ProductPreview = ({ imageUrl, title, price, oldPrice, code = "FOB-2045" })
                                 children: price
                             }, void 0, false, {
                                 fileName: "[project]/src/components/ProductPreview.tsx",
-                                lineNumber: 55,
+                                lineNumber: 57,
                                 columnNumber: 11
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/ProductPreview.tsx",
-                        lineNumber: 49,
+                        lineNumber: 51,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -178,24 +178,24 @@ const ProductPreview = ({ imageUrl, title, price, oldPrice, code = "FOB-2045" })
                         onClick: (e)=>e.preventDefault(),
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$Media$2f$AddToCartIcon$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                             fileName: "[project]/src/components/ProductPreview.tsx",
-                            lineNumber: 65,
+                            lineNumber: 67,
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/src/components/ProductPreview.tsx",
-                        lineNumber: 59,
+                        lineNumber: 61,
                         columnNumber: 9
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/ProductPreview.tsx",
-                lineNumber: 48,
+                lineNumber: 50,
                 columnNumber: 7
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/ProductPreview.tsx",
-        lineNumber: 23,
+        lineNumber: 25,
         columnNumber: 5
     }, ("TURBOPACK compile-time value", void 0));
 };
@@ -228,10 +228,29 @@ function WallpapersPage() {
         "КВІТИ"
     ];
     const [products, setProducts] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
+    const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(true);
+    const [error, setError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
-        fetch("http://localhost:8080/wallpapers").then((res)=>res.json()).then((data)=>setProducts(data)).catch((err)=>console.error("Failed to fetch products:", err));
+        setLoading(true);
+        setError(null);
+        fetch("http://localhost:8080/wallpapers").then((res)=>{
+            if (!res.ok) throw new Error("Network response was not ok");
+            return res.json();
+        }).then((data)=>{
+            // If your API returns { content: [...] }
+            if (Array.isArray(data.content)) {
+                setProducts(data.content);
+            } else if (Array.isArray(data)) {
+                setProducts(data);
+            } else {
+                setProducts([]);
+                setError("Unexpected response format");
+            }
+        }).catch((err)=>{
+            setError(err.message || "Failed to fetch products");
+            setProducts([]);
+        }).finally(()=>setLoading(false));
     }, []);
-    console.log(products);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "flex flex-row px-[clamp(1rem,6vw,7.5rem)] gap-y-20 xl:gap-y-30 py-4 lg:py-8",
         children: [
@@ -239,7 +258,7 @@ function WallpapersPage() {
                 categories: categories
             }, void 0, false, {
                 fileName: "[project]/src/app/wallpapers/page.tsx",
-                lineNumber: 27,
+                lineNumber: 49,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -250,7 +269,7 @@ function WallpapersPage() {
                         children: "Фотошпалери"
                     }, void 0, false, {
                         fileName: "[project]/src/app/wallpapers/page.tsx",
-                        lineNumber: 29,
+                        lineNumber: 51,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$material$2f$esm$2f$Pagination$2f$Pagination$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Pagination$3e$__["Pagination"], {
@@ -297,39 +316,55 @@ function WallpapersPage() {
                         className: "mb-8 lg:mb-12"
                     }, void 0, false, {
                         fileName: "[project]/src/app/wallpapers/page.tsx",
-                        lineNumber: 32,
+                        lineNumber: 54,
                         columnNumber: 9
+                    }, this),
+                    loading && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        children: "Завантаження..."
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/wallpapers/page.tsx",
+                        lineNumber: 97,
+                        columnNumber: 21
+                    }, this),
+                    error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "text-red-500",
+                        children: error
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/wallpapers/page.tsx",
+                        lineNumber: 98,
+                        columnNumber: 19
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "grid w-full grid-cols-2 xl:grid-cols-3 gap-[clamp(1rem,2vw,2.5rem)]",
                         children: products.map((product, idx)=>{
                             const imageUrl = product.image?.startsWith("/") ? `http://localhost:8080${product.image}` : product.image;
                             return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ProductPreview$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                title: product.name,
+                                title: product.name || product.article,
                                 imageUrl: imageUrl,
                                 price: `${product.basePrice} грн/м²`,
-                                oldPrice: product.oldPrice ? `${product.oldPrice} грн` : undefined
-                            }, product.id || idx, false, {
+                                oldPrice: product.salePrice ? `${product.salePrice} грн/м²` : undefined,
+                                slug: product.slug
+                            }, product.article || idx, false, {
                                 fileName: "[project]/src/app/wallpapers/page.tsx",
-                                lineNumber: 81,
+                                lineNumber: 105,
                                 columnNumber: 15
                             }, this);
                         })
                     }, void 0, false, {
                         fileName: "[project]/src/app/wallpapers/page.tsx",
-                        lineNumber: 75,
+                        lineNumber: 99,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/wallpapers/page.tsx",
-                lineNumber: 28,
+                lineNumber: 50,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/wallpapers/page.tsx",
-        lineNumber: 26,
+        lineNumber: 48,
         columnNumber: 5
     }, this);
 }
