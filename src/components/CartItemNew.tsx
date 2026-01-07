@@ -102,13 +102,13 @@ const CartItem: React.FC<CartItemProps> = ({
                     className="flex justify-between text-sm text-gray-600 border-b border-gray-50 pb-1 last:border-0"
                   >
                     <span>{opt.label}</span>
-                    <span className="font-medium text-navy">
-                      +{opt.price} грн
-                      {opt.label.includes("Друк") ||
-                      opt.label.includes("Ламінування")
-                        ? "/м²"
-                        : ""}
-                    </span>
+                      <span className="font-medium text-navy">
+                            +{opt.price} грн
+                          {/* Add ?. and handle the null case with a fallback empty string */}
+                          {(opt.label?.includes("Друк") || opt.label?.includes("Ламінування"))
+                              ? "/м²"
+                              : ""}
+                        </span>
                   </li>
                 ))}
               </ul>

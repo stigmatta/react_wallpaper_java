@@ -2,24 +2,23 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 export interface CartItemOption {
-  label: string;
-  price: number;
+    id: string;
+    label: string;
+    price: number;
 }
 
 export interface CartItem {
-  id: string; // Unique ID for the cart item (e.g. timestamp or random)
-  productId: string;
-  title: string;
-  code: string;
-  size: string; // e.g. "100см x 200см"
-  width?: number;
-  height?: number;
-  material?: string;
-  pricePerM2?: number;
-  imageUrl?: string;
-  options: CartItemOption[];
-  total: number;
-  quantity?: number; // Added quantity property
+    id: string;
+    productId: string;
+    productType?: ProductType;
+    title: string;
+    code: string;
+    imageUrl?: string;
+    specifications: Record<string, string>;
+    options: CartItemOption[];
+    quantity: number;
+    price: number;
+    total: number;
 }
 
 interface CartContextType {

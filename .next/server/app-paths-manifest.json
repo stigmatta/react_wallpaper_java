@@ -1,4 +1,9 @@
 {
   "/cart/page": "app/cart/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js"
+  "/checkout/page": "app/checkout/page.js",
+  "/login/page": "app/login/page.js",
+  "/page": "app/page.js",
+  "/wallpapers/page": "app/wallpapers/page.js",
+  "/souvenirs/page": "app/souvenirs/page.js",
+  "/souvenirs/[slug]/page": "app/souvenirs/[slug]/page.js"
 }

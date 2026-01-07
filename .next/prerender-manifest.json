@@ -1,11 +1,1 @@
-{
-  "version": 4,
-  "routes": {},
-  "dynamicRoutes": {},
-  "notFoundRoutes": [],
-  "preview": {
-    "previewModeId": "eeb76872b90cf2522b9077279836c4be",
-    "previewModeSigningKey": "b851bdcf6f39e0626cd20b4c3b6d55c994797721b1452cdbaad9fc0d883a923d",
-    "previewModeEncryptionKey": "9d35cc9695938bb006fec68f5588f3a129470797e64a7627613f39fdcb654403"
-  }
-}
+{"version":4,"routes":{"/wallpapers/alphabet-and-numbers":{},"/wallpapers/cute-forest-animals":{},"/wallpapers/cars-and-tracks":{},"/wallpapers/scandinavian-zigzags":{},"/wallpapers/marble-chic":{},"/wallpapers/3d-tunnel-abstraction":{},"/wallpapers/3d-tropical-jungle":{},"/wallpapers/loft-brick-wall":{},"/wallpapers/3d-cosmic-nebula":{},"/wallpapers/space-journey":{},"/wallpapers/3d-underwater-world":{},"/wallpapers/classic-damask":{},"/wallpapers/3d-magnolia-flowers":{},"/wallpapers/night-mountains":{},"/wallpapers/clouds-and-air-balloons":{},"/wallpapers/vintage-floral-garden":{},"/wallpapers/little-princesses":{},"/wallpapers/concrete-texture":{},"/wallpapers/3d-mountain-landscape":{},"/wallpapers/geometric-hexagon":{},"/souvenirs/wooden-wall-clock":{},"/souvenirs/plaster-key-holder":{},"/souvenirs/face-ceramic-planter":{},"/souvenirs/velvet-decorative-pillow":{},"/souvenirs/hand-molded-clay-mug":{},"/souvenirs/gold-line-photo-frame":{},"/souvenirs/vintage-postcard-set":{},"/souvenirs/ukrainian-trident-keychain":{},"/souvenirs/ceramic-salt-and-pepper-shakers":{},"/souvenirs/zen-incense-sticks-set":{},"/souvenirs/lucky-cat-figurine":{},"/souvenirs/hot-drink-coaster-set":{},"/souvenirs/ceramic-house-candle-holder":{},"/souvenirs/eiffel-tower-statuette":{},"/souvenirs/kyiv-chestnut-magnet":{},"/souvenirs/modern-ceramic-vase":{},"/souvenirs/mandala-ceramic-plate":{},"/souvenirs/lavender-scented-candle":{},"/souvenirs/metal-jewelry-box":{},"/souvenirs/snow-globe":{}},"dynamicRoutes":{"/wallpapers/[slug]":{"fallback":null},"/souvenirs/[slug]":{"fallback":null}},"notFoundRoutes":[],"preview":{"previewModeId":"c2cebe175589334e7f4b7861b88d15fa","previewModeSigningKey":"71905d72967f3bdd23743862e036832434ed418039d5a724849d766b99c39bba","previewModeEncryptionKey":"09121e1be353b25424856f6b318ce3b232802b5b662fc10ea4c1f37901d19a73"}}
