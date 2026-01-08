@@ -1473,14 +1473,14 @@ function CheckoutPage() {
                 }));
         }
     };
-    const handleOrderSubmit = ()=>{
+    const handleOrderSubmit = async ()=>{
         const newErrors = {};
-        // Basic fields
+        // 1. Basic fields validation
         if (!formData.lastName.trim()) newErrors.lastName = true;
         if (!formData.firstName.trim()) newErrors.firstName = true;
         if (!formData.phone.trim()) newErrors.phone = true;
         if (!formData.email.trim()) newErrors.email = true;
-        // Delivery Validation
+        // 2. Delivery Validation
         let isDeliveryValid = true;
         if (deliveryMethod === "nova") {
             if (novaType === "courier") {
@@ -1505,8 +1505,83 @@ function CheckoutPage() {
             return;
         }
         setIsSubmitting(true);
-        clearCart();
-        router.push("/checkout/success");
+        try {
+            const token = localStorage.getItem("token");
+            if (!token) {
+                alert("Для оформлення замовлення потрібно авторизуватися.");
+                setIsSubmitting(false);
+                return;
+            }
+            // 3. Construct Order Items
+            const orderItems = items.map((item)=>{
+                var _item_productType;
+                return {
+                    productTypeId: (_item_productType = item.productType) === null || _item_productType === void 0 ? void 0 : _item_productType.id,
+                    productId: item.productId,
+                    quantity: item.quantity,
+                    price: item.price,
+                    specifications: item.specifications,
+                    orderItemExtraFeatures: item.options.map((opt)=>({
+                            extraFeature: {
+                                id: opt.id
+                            },
+                            value: opt.label
+                        }))
+                };
+            });
+            console.log(orderItems);
+            // 4. Construct Payload
+            const payload = {
+                items: orderItems
+            };
+            const response = await fetch("http://localhost:8080/orders", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer ".concat(token)
+                },
+                body: JSON.stringify(payload)
+            });
+            // 5. Handle Response
+            // We read as text first so we can use it for both logging and JSON parsing
+            const responseText = await response.text();
+            console.log("Status Code:", response.status);
+            if (!response.ok) {
+                console.error("Server Error Raw Output:", responseText);
+                let errorMessage = "Failed to submit order";
+                try {
+                    // Try to extract a clean message from JSON
+                    const errorJson = JSON.parse(responseText);
+                    errorMessage = errorJson.message || errorJson.error || errorMessage;
+                } catch (e) {
+                    // If not JSON, use the raw text if it's short
+                    if (responseText && responseText.length < 100) errorMessage = responseText;
+                }
+                // Special handling for potential stale data (IDs that don't exist anymore in DB)
+                if (response.status === 500 || errorMessage.includes("Internal Error")) {
+                    throw new Error("Server Error: ".concat(errorMessage, ". Hint: If the backend restarted, your Cart Items or User Token might be stale. Try clearing your cart and logging in again."));
+                }
+                throw new Error(errorMessage);
+            }
+            // 6. Success
+            clearCart();
+            router.push("/checkout/success");
+        } catch (error) {
+            console.error("Error submitting order:", error);
+            const err = error;
+            const message = err.message || "Сталася помилка при оформленні замовлення.";
+            // Logic to help the user if the DB was wiped/restarted
+            if (message.includes("stale") || message.includes("backend restarted")) {
+                if (confirm("Помилка сервера: можливо застаріли дані кошика через перезапуск серверу. Очистити кошик?")) {
+                    clearCart();
+                    router.push("/");
+                }
+            } else {
+                alert(message);
+            }
+        } finally{
+            setIsSubmitting(false);
+        }
     };
     if (!isLoaded) {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1514,7 +1589,7 @@ function CheckoutPage() {
             children: "Loading..."
         }, void 0, false, {
             fileName: "[project]/src/app/checkout/page.tsx",
-            lineNumber: 142,
+            lineNumber: 243,
             columnNumber: 7
         }, this);
     }
@@ -1526,7 +1601,7 @@ function CheckoutPage() {
                 children: "Оформлення замовлення"
             }, void 0, false, {
                 fileName: "[project]/src/app/checkout/page.tsx",
-                lineNumber: 150,
+                lineNumber: 251,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1541,7 +1616,7 @@ function CheckoutPage() {
                                 errors: errors
                             }, void 0, false, {
                                 fileName: "[project]/src/app/checkout/page.tsx",
-                                lineNumber: 157,
+                                lineNumber: 258,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$Checkout$2f$DeliveryForm$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -1562,7 +1637,7 @@ function CheckoutPage() {
                                 filteredList: filteredList
                             }, void 0, false, {
                                 fileName: "[project]/src/app/checkout/page.tsx",
-                                lineNumber: 163,
+                                lineNumber: 264,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$Checkout$2f$PaymentForm$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -1570,7 +1645,7 @@ function CheckoutPage() {
                                 setPaymentMethod: setPaymentMethod
                             }, void 0, false, {
                                 fileName: "[project]/src/app/checkout/page.tsx",
-                                lineNumber: 181,
+                                lineNumber: 282,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -1589,25 +1664,25 @@ function CheckoutPage() {
                                             d: "M14 5l7 7m0 0l-7 7m7-7H3"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/checkout/page.tsx",
-                                            lineNumber: 196,
+                                            lineNumber: 297,
                                             columnNumber: 15
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/checkout/page.tsx",
-                                        lineNumber: 190,
+                                        lineNumber: 291,
                                         columnNumber: 13
                                     }, this),
                                     "Повернутися до корзини"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/checkout/page.tsx",
-                                lineNumber: 186,
+                                lineNumber: 287,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/checkout/page.tsx",
-                        lineNumber: 156,
+                        lineNumber: 257,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$Checkout$2f$OrderSummary$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -1618,19 +1693,19 @@ function CheckoutPage() {
                         handleOrderSubmit: handleOrderSubmit
                     }, void 0, false, {
                         fileName: "[project]/src/app/checkout/page.tsx",
-                        lineNumber: 208,
+                        lineNumber: 309,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/checkout/page.tsx",
-                lineNumber: 154,
+                lineNumber: 255,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/checkout/page.tsx",
-        lineNumber: 149,
+        lineNumber: 250,
         columnNumber: 5
     }, this);
 }

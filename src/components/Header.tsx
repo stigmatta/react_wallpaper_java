@@ -72,9 +72,9 @@ const Header: React.FC = () => {
               <Image src="/logo.png" alt="Logo" width={92} height={44} />
             </Link>
           </div>
-            <div className="hidden lg:block flex-1 max-w-md mx-4">
-                <LiveSearchBar />
-            </div>
+          <div className="hidden lg:block flex-1 max-w-md mx-4">
+            <LiveSearchBar />
+          </div>
           {/* Desktop Links (Center) */}
           <div className="hidden lg:flex flex-1 justify-center">
             <div className="flex gap-6 uppercase">
@@ -109,14 +109,26 @@ const Header: React.FC = () => {
                   leaveFrom="transform opacity-100 scale-100"
                   leaveTo="transform opacity-0 scale-95"
                 >
-                  <MenuItems className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+                  <MenuItems className="absolute right-0 mt-2 w-48 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+                    <MenuItem>
+                      {({ active }) => (
+                        <Link
+                          href="/user"
+                          className={`${
+                            active ? "bg-gray-100" : ""
+                          } block px-4 py-2 text-sm text-gray-700`}
+                        >
+                          Мій профіль
+                        </Link>
+                      )}
+                    </MenuItem>
                     <MenuItem>
                       {({ active }) => (
                         <button
                           onClick={logout}
                           className={`${
                             active ? "bg-gray-100" : ""
-                          } block w-full px-4 py-2 text-left text-sm text-gray-700`}
+                          } block w-full text-left px-4 py-2 text-sm text-gray-700`}
                         >
                           Вийти
                         </button>
