@@ -54,8 +54,7 @@ const SouvenirClient: React.FC<SouvenirClientProps> = ({ product, extraFeatures,
             selectedFeatures,
             extraFeatures,
             specifications: {
-                color: selectedColor,
-                gift_wrap: isGiftWrap ? "true" : "false"
+                color: selectedColor
             },
             quantity: quantity,
             totalPrice: calculateTotalPrice(),
