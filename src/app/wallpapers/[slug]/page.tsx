@@ -50,15 +50,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
 export async function generateStaticParams() {
   try {
     const res = await fetch("http://localhost:8080/wallpapers?size=1000");
-    if (!res.ok) {
-        console.error("Failed to fetch wallpapers for static params");
-        return [];
-    }
-
+    if (!res.ok) return [];
     const data = await res.json();
-    let productList: { slug: string }[] = [];
 
-    // Safely extract the list based on your API structure
+    let productList: { slug: string }[] = [];
     if (data.products && Array.isArray(data.products.content)) {
       productList = data.products.content;
     } else if (Array.isArray(data.content)) {
@@ -71,7 +66,6 @@ export async function generateStaticParams() {
       slug: p.slug,
     }));
   } catch (error) {
-    console.error("Error generating static params for wallpapers:", error);
     return [];
   }
 }

@@ -1,6 +1,5 @@
 ﻿import {ExtraFeature, SouvenirProduct, WallpaperProduct, PrintingProduct} from "@/interfaces/product";
 import {ProductType} from "@/interfaces/productType";
-import {CartItem} from "@/context/CartContext";
 
 interface CartMapperParams {
     product: WallpaperProduct | SouvenirProduct | PrintingProduct;

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import { ExtraFeature, PrintingProduct, PrintMethod } from "@/interfaces/product";
+import { ExtraFeature, PrintingProduct } from "@/interfaces/product";
 import { useCart } from "@/context/CartContext";
 import toast from "react-hot-toast";
 import Extra from "@/components/Extra";

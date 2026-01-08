@@ -49,17 +49,17 @@ export default async function PrintingPage({ params }: ProductPageProps) {
 }
 
 export async function generateStaticParams() {
+  // When building for production (e.g. Vercel) without a running backend,
+  // we cannot fetch the list of products.
+  // We return an empty array to allow the build to succeed.
+  // Note: This means individual product pages won't be statically generated
+  // and will likely result in 404s on a static export unless handled otherwise.
   try {
     const res = await fetch("http://localhost:8080/printings?size=1000");
-    if (!res.ok) {
-      console.error("Failed to fetch printings for static params");
-      return [];
-    }
-
+    if (!res.ok) return [];
     const data = await res.json();
-    let productList: { slug: string }[] = [];
 
-    // Safely extract the list depending on pagination or raw list
+    let productList: { slug: string }[] = [];
     if (data.products && Array.isArray(data.products.content)) {
       productList = data.products.content;
     } else if (Array.isArray(data.content)) {
@@ -72,11 +72,7 @@ export async function generateStaticParams() {
       slug: p.slug,
     }));
   } catch (error) {
-    console.error("Error generating static params for printings:", error);
-    // Return empty array instead of failing, allowing build to proceed
-    // The specific pages will then be generated on demand if not using 'export'
-    // But since we are using 'export', this might result in those pages being missing from build
-    // This is better than breaking the whole build.
+    // Backend likely not available during build
     return [];
   }
 }

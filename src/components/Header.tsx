@@ -3,7 +3,6 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import SearchIcon from "./Media/Search";
 import CartIcon from "./Media/Cart";
 import UserIcon from "./Media/User";
 import { useAuth } from "@/context/AuthContext";

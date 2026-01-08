@@ -55,24 +55,22 @@ export default async function SouvenirPage({ params }: ProductPageProps) {
 export async function generateStaticParams() {
   try {
     const res = await fetch("http://localhost:8080/souvenirs?size=1000");
-    if (!res.ok) {
-      console.error("Failed to fetch souvenirs for static params");
-      return [];
-    }
+    if (!res.ok) return [];
     const data = await res.json();
-    let productList: { slug: string }[] = [];
 
+    let productList: { slug: string }[] = [];
     if (data.products && Array.isArray(data.products.content)) {
       productList = data.products.content;
     } else if (Array.isArray(data.content)) {
       productList = data.content;
+    } else if (Array.isArray(data)) {
+      productList = data;
     }
 
     return productList.map((p) => ({
       slug: p.slug,
     }));
   } catch (error) {
-    console.error("Error generating static params for souvenirs:", error);
     return [];
   }
 }
