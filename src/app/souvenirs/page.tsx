@@ -7,6 +7,8 @@ import {Category, WallpaperProduct} from "@/interfaces/product";
 import CatalogSearch from "@/components/CatalogSearch";
 import CatalogFilters, {FilterState} from "@/components/CatalogFilters"; // Reusable search component
 
+export const dynamicParams = true;
+
 export default function SouvenirsPage() {
     const [products, setProducts] = useState<WallpaperProduct[]>([]);
     const [categories, setCategories] = useState<Category[]>([]);

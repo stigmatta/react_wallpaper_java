@@ -16,7 +16,7 @@ export interface BaseProductAutocomplete {
     id: string;
     name: string;
     article: string;
-    productType: ProductType;
+    productType: string;
     slug: string;
     image: string;
     basePrice: number;

@@ -87,37 +87,6 @@ const ProductClient: React.FC<ProductClientProps> = ({
     toast.success("Товар додано до кошика!");
   };
 
-  // const handleAddToCart = () => {
-  //     // Map selected features to the format expected by your OrderItemExtraFeature join entity
-  //     const options = Array.from(globalFeatures || [])
-  //         .filter((f) => selectedFeatures[f.id])
-  //         .map((f) => ({
-  //             id: f.id, // Database UUID
-  //             label: f.name,
-  //             price: f.price,
-  //         }));
-  //
-  //     addToCart({
-  //         productId: product.id,
-  //         productType: productType,
-  //         title: product.name,
-  //         code: product.article,
-  //         imageUrl: product.image?.startsWith("/")
-  //             ? `http://localhost:8080${product.image}`
-  //             : product.image,
-  //         specifications: {
-  //             width: width.toString(),
-  //             height: height.toString(),
-  //             material_id: selectedMaterialId,
-  //         },
-  //         options,
-  //         quantity: 1,
-  //         price: product.salePrice || product.basePrice,
-  //         total: calculatePrice(),
-  //     });
-  //
-  //     toast.success("Товар додано до кошика!");
-  // };
 
   return (
     <div className="flex flex-col px-4 sm:px-8 md:px-[clamp(2rem,6vw,8rem)] py-12 bg-gray-50 min-h-screen">

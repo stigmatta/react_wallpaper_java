@@ -7,6 +7,9 @@ import { WallpaperProduct } from "@/interfaces/product";
 import CatalogSearch from "@/components/CatalogSearch";
 import CatalogFilters, { FilterState } from "@/components/CatalogFilters"; // Import the filter component
 
+export const dynamicParams = true;
+
+
 export default function WallpapersPage() {
     const [categories, setCategories] = useState([]);
     const [products, setProducts] = useState<WallpaperProduct[]>([]);
@@ -17,7 +20,6 @@ export default function WallpapersPage() {
     const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
     const [searchTerm, setSearchTerm] = useState("");
 
-    // New state for additional filters (Price, etc.)
     const [extraFilters, setExtraFilters] = useState<FilterState>({});
 
     const isSearching = searchTerm.length > 0;

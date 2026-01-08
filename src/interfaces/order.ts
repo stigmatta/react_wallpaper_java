@@ -1,8 +1,9 @@
 export interface OrderItemDTO {
+    name: string;
     productId: string;
     productType: string;
     quantity: number;
-    purchasePrice: number; // Renamed from price
+    purchasePrice: number;
 }
 
 export interface OrderDTO {
