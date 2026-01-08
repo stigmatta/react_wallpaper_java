@@ -1,4 +1,4 @@
-// File: C:\Users\morri\WebstormProjects\react_wallpaper_java\src\app\page.tsx
+// File: /Users/dimabalawov/wallpaper_imp/src/app/page.tsx
 import * as entry from '../../../src/app/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

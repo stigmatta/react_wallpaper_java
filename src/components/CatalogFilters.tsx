@@ -10,7 +10,7 @@ interface CatalogFiltersProps {
     onFilterChange: (filters: FilterState) => void;
 }
 
-export default function CatalogFilters({ type, onFilterChange }: CatalogFiltersProps) {
+export default function CatalogFilters({ onFilterChange }: CatalogFiltersProps) {
     const [priceInput, setPriceInput] = useState<string>("");
     const lastSentValue = useRef<string>("");
 

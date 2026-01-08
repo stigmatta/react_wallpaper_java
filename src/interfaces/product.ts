@@ -1,3 +1,5 @@
+import { ProductType } from "./productType";
+
 export interface BaseProduct {
     id: string;
     name: string;

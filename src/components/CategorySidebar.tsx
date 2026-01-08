@@ -1,4 +1,5 @@
 import React from "react";
+import { Category } from "@/interfaces/product";
 
 interface CategorySidebarProps {
   categories: Category[];

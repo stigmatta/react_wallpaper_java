@@ -1,74 +1,76 @@
 import SouvenirClient from "@/components/SouvenirClient";
-import { ExtraFeature, SouvenirProduct } from "@/interfaces/product"; // Assuming SouvenirProduct is here
+import { ExtraFeature, SouvenirProduct } from "@/interfaces/product";
 import { notFound } from "next/navigation";
+import { ProductType } from "@/interfaces/productType";
 
-
+// Server Component: fetch product data and render client component
 interface ProductPageProps {
-    params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string }>;
 }
 
 export default async function SouvenirPage({ params }: ProductPageProps) {
-    const { slug } = await params;
+  const { slug } = await params;
 
-    // 1. Parallel fetch for product data and all product types
-    const [productRes, typesRes] = await Promise.all([
-        fetch(`http://localhost:8080/souvenirs/${slug}`, { next: { revalidate: 3600 } }),
-        fetch(`http://localhost:8080/catalog/product-types`, { next: { revalidate: 86400 } })
-    ]);
+  const [productRes, typesRes] = await Promise.all([
+    fetch(`http://localhost:8080/souvenirs/${slug}`),
+    fetch(`http://localhost:8080/catalog/product-types`),
+  ]);
 
-    if (!productRes.ok) return notFound();
+  if (!productRes.ok) return notFound();
 
-    const product: SouvenirProduct = await productRes.json();
+  // Explicitly type the result as SouvenirProduct from interface
+  const product: SouvenirProduct = await productRes.json();
+  if (!product) return notFound();
+
+  let features: ExtraFeature[] = [];
+  let souvenirType: ProductType | undefined;
+
+  if (typesRes.ok) {
     const allProductTypes: ProductType[] = await typesRes.json();
-
-    const souvenirType = allProductTypes.find(
-        (t) => t.name.toUpperCase() === "SOUVENIR"
+    souvenirType = allProductTypes.find(
+      (t) => t.name.toUpperCase() === "SOUVENIR"
     );
 
-    let features: ExtraFeature[] = [];
     if (souvenirType) {
-        const featuresRes = await fetch(
-            `http://localhost:8080/catalog/features/${souvenirType.id}`,
-            { next: { revalidate: 86400 } }
-        );
-        if (featuresRes.ok) {
-            features = await featuresRes.json();
-        }
+      const featuresRes = await fetch(
+        `http://localhost:8080/catalog/features/${souvenirType.id}`
+      );
+      if (featuresRes.ok) {
+        features = await featuresRes.json();
+      }
     }
+  }
 
-    return (
-        <SouvenirClient
-            product={product}
-            extraFeatures={features}
-            productType={souvenirType}
-        />
-    );
+  // Use SouvenirClient instead of ProductClient
+  return (
+    <SouvenirClient
+      product={product}
+      extraFeatures={features}
+      productType={souvenirType}
+    />
+  );
 }
 
+// Required for static export: generate all possible slugs for pre-rendering
 export async function generateStaticParams() {
-    try {
-        const res = await fetch("http://localhost:8080/souvenirs?size=1000");
-        if (!res.ok) {
-            console.error("Failed to fetch souvenirs for static params");
-            return [];
-        }
-
-        const data = await res.json();
-        let productList: { slug: string }[] = [];
-
-        if (data.products && Array.isArray(data.products.content)) {
-            productList = data.products.content;
-        } else if (Array.isArray(data.content)) {
-            productList = data.content;
-        } else if (Array.isArray(data)) {
-            productList = data;
-        }
-
-        return productList.map((p) => ({
-            slug: p.slug,
-        }));
-    } catch (error) {
-        console.error("Error generating static params for souvenirs:", error);
-        return [];
+  try {
+    const res = await fetch("http://localhost:8080/souvenirs?size=1000");
+    if (!res.ok) {
+      console.error("Failed to fetch souvenirs for static params");
+      return [];
     }
+    const data = await res.json();
+    let productList: { slug: string }[] = [];
+
+    if (data.products && Array.isArray(data.products.content)) {
+      productList = data.products.content;
+    } else if (Array.isArray(data.content)) {
+      productList = data.content;
+    }
+
+    return productList.map((p: { slug: string }) => ({ slug: p.slug }));
+  } catch (error) {
+    console.error("Error generating static params for souvenirs:", error);
+    return [];
+  }
 }

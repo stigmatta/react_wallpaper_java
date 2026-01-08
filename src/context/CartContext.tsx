@@ -1,24 +1,25 @@
 "use client";
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { ProductType } from "@/interfaces/productType";
 
 export interface CartItemOption {
-    id: string;
-    label: string;
-    price: number;
+  id: string;
+  label: string;
+  price: number;
 }
 
 export interface CartItem {
-    id: string;
-    productId: string;
-    productType?: ProductType;
-    title: string;
-    code: string;
-    imageUrl?: string;
-    specifications: Record<string, string>;
-    options: CartItemOption[];
-    quantity: number;
-    price: number;
-    total: number;
+  id: string;
+  productId: string;
+  productType?: ProductType;
+  title: string;
+  code: string;
+  imageUrl?: string;
+  specifications: Record<string, string>;
+  options: CartItemOption[];
+  quantity: number;
+  price: number;
+  total: number;
 }
 
 interface CartContextType {

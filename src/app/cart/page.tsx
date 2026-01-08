@@ -36,7 +36,7 @@ const CartPage = () => {
                                 key={item.id}
                                 className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 transition-shadow hover:shadow-md"
                             >
-                                <CartItem {...item} onRemove={() => removeFromCart(item.id)}/>
+                                <CartItem size={item.specifications?.size} {...item} onRemove={() => removeFromCart(item.id)}/>
                             </div>
                         ))
                     )}

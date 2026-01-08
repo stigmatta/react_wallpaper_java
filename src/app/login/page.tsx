@@ -5,7 +5,7 @@ import {useRouter} from "next/navigation";
 import {useAuth} from "@/context/AuthContext";
 import toast from "react-hot-toast";
 
-export function LoginPage() {
+export default function LoginPage() {
     const [loginInput, setLoginInput] = useState("");
     const [password, setPassword] = useState("");
     const router = useRouter();
@@ -34,7 +34,8 @@ export function LoginPage() {
                 try {
                     const errorData = JSON.parse(errorText);
                     errorMessage = errorData.message || errorData.error || JSON.stringify(errorData);
-                } catch (e) {
+                } catch (e: unknown) { // Use unknown instead of default (implicitly any) or simple catch
+                    console.error("Failed to parse error response:", e);
                     errorMessage = errorText;
                 }
                 throw new Error(errorMessage || `Server error: ${loginResponse.status}`);
@@ -53,11 +54,12 @@ export function LoginPage() {
                     token = data;
                 } else if (typeof data === "object" && data !== null) {
                     token =
-                        (data as any).token ||
-                        (data as any).accessToken ||
-                        (data as any).jwt;
+                        (data as { token?: string }).token ||
+                        (data as { accessToken?: string }).accessToken ||
+                        (data as { jwt?: string }).jwt || "";
                 }
-            } catch (e) {
+            } catch (e: unknown) { // Use unknown
+                console.error("Token parsing error:", e);
                 // If parsing fails, assume the response body is the token itself (raw string)
                 token = responseText;
             }
@@ -107,10 +109,11 @@ export function LoginPage() {
 
             toast.success("Успішний вхід!");
             router.push("/");
-        } catch (error: any) {
-            console.error("Login error:", error);
+        } catch (error: unknown) {
+             console.error("Login error:", error);
             // Show the actual error message from the server
-            toast.error(error.message || "Невірний email або пароль");
+            const message = error instanceof Error ? error.message : "Невірний email або пароль";
+            toast.error(message);
         }
     };
 

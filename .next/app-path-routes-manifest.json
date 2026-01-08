@@ -1,0 +1,14 @@
+{
+  "/_not-found/page": "/_not-found",
+  "/favicon.ico/route": "/favicon.ico",
+  "/cart/page": "/cart",
+  "/login/page": "/login",
+  "/page": "/",
+  "/checkout/page": "/checkout",
+  "/checkout/success/page": "/checkout/success",
+  "/register/page": "/register",
+  "/wallpapers/page": "/wallpapers",
+  "/souvenirs/page": "/souvenirs",
+  "/souvenirs/[slug]/page": "/souvenirs/[slug]",
+  "/wallpapers/[slug]/page": "/wallpapers/[slug]"
+}

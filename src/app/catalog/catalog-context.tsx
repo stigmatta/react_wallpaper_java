@@ -1,23 +1,23 @@
 ﻿"use client";
-import React, {createContext, useContext} from "react";
-import {ProductType} from "@/interfaces/catalog";
+import React, { createContext, useContext } from "react";
+import { ProductType } from "@/interfaces/productType";
 
 const CatalogContext = createContext<{ productTypes: ProductType[] }>({
-    productTypes: [],
+  productTypes: [],
 });
 
 export const CatalogProvider = ({
-                                    children,
-                                    productTypes
-                                }: {
-    children: React.ReactNode;
-    productTypes: ProductType[]
+  children,
+  productTypes,
+}: {
+  children: React.ReactNode;
+  productTypes: ProductType[];
 }) => {
-    return (
-        <CatalogContext.Provider value={{productTypes}}>
-            {children}
-        </CatalogContext.Provider>
-    );
+  return (
+    <CatalogContext.Provider value={{ productTypes }}>
+      {children}
+    </CatalogContext.Provider>
+  );
 };
 
 export const useCatalog = () => useContext(CatalogContext);

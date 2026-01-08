@@ -37,9 +37,11 @@ export default function OrderSummary({
                 <h3 className="font-medium text-navy text-sm line-clamp-2 mb-1">
                   {item.title}
                 </h3>
+                {item.specifications && item.specifications.size && (
                 <p className="text-xs text-gray-500 mb-2">
-                  Розмір: {item.width}см x {item.height}см
+                  Розмір: {item.specifications.size}
                 </p>
+                )}
                 <div className="font-bold text-navy text-sm">
                   {item.total} грн
                 </div>

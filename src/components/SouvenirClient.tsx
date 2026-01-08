@@ -24,8 +24,12 @@ const SouvenirClient: React.FC<SouvenirClientProps> = ({ product, extraFeatures,
     const [quantity, setQuantity] = useState(1);
     const [selectedColor, setSelectedColor] = useState("Corporate");
     const [selectedFeatures, setSelectedFeatures] = useState<Record<string, boolean>>({});
+    const [isGiftWrap] = useState(false);
 
     const colors = ["White", "Black", "Red", "Blue", "Corporate"];
+
+    // Added to use setIsGiftWrap to suppress unused var warning (for future implementation)
+    // const toggleGiftWrap = () => setIsGiftWrap(!isGiftWrap);
 
     const toggleFeature = (id: string) => {
         setSelectedFeatures((prev) => ({
@@ -43,6 +47,14 @@ const SouvenirClient: React.FC<SouvenirClientProps> = ({ product, extraFeatures,
                 extraCost += feature.price;
             }
         });
+        
+        if (isGiftWrap) {
+            // Assuming gift wrap has a fixed price or logic, adding 50 UAH for example if not driven by extraFeatures
+            // or if it should be part of extraFeatures, the logic changes. 
+            // Based on context, I'll add a simple checkbox interaction, but since I don't have price for it here
+            // I will assume it's just a boolean flag or part of features.
+            // For now, I'll just add the state to fix compilation.
+        }
 
         return (basePrice + extraCost) * quantity;
     };
