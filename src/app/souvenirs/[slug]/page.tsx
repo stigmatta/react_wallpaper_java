@@ -72,7 +72,5 @@ export async function generateStaticParams() {
     return productList.map((p) => ({
       slug: p.slug,
     }));
-  } catch (error) {
-    return [];
-  }
+  } catch { return []; }
 }

@@ -73,8 +73,5 @@ export async function generateStaticParams() {
     return productList.map((p) => ({
       slug: p.slug,
     }));
-  } catch (error) {
-    // Backend likely not available during build
-    return [];
-  }
+  } catch { return []; }
 }
