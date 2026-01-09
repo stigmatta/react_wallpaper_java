@@ -11,6 +11,8 @@ const UserPage = () => {
     const router = useRouter();
     const [orders, setOrders] = useState<Order[]>([]);
     const [loading, setLoading] = useState(true);
+    const API_URL = process.env.NEXT_PUBLIC_API_URL
+
 
     useEffect(() => {
         if (!isAuthenticated) {
@@ -21,7 +23,7 @@ const UserPage = () => {
         const fetchOrders = async () => {
             try {
                 const token = localStorage.getItem("token");
-                const res = await fetch("http://localhost:8080/orders/my-history", {
+                const res = await fetch(`${API_URL}/orders/my-history`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },

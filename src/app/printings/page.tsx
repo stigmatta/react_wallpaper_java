@@ -13,6 +13,8 @@ export const dynamicParams = true;
 
 export default function PrintingsPage() {
     const [products, setProducts] = useState<PrintingProduct[]>([]);
+    const API_URL = process.env.NEXT_PUBLIC_API_URL
+    
     const [categories, setCategories] = useState<Category[]>([]);
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
@@ -39,7 +41,7 @@ export default function PrintingsPage() {
             params.append("basePrice", extraFilters.basePrice.toString());
         }
 
-        fetch(`http://localhost:8080/printings?${params.toString()}`)
+        fetch(`${API_URL}/printings?${params.toString()}`)
             .then((res) => {
                 if (!res.ok) throw new Error("Помилка завантаження");
                 return res.json();
@@ -57,7 +59,7 @@ export default function PrintingsPage() {
             })
             .catch((err) => setError(err.message))
             .finally(() => setLoading(false));
-    }, [page, selectedCategory, searchTerm, extraFilters, categories.length]);
+    }, [page, selectedCategory, searchTerm, extraFilters, categories.length, API_URL]);
 
     const handlePageChange = useCallback(
         (event: React.ChangeEvent<unknown>, value: number) => {
@@ -154,7 +156,7 @@ export default function PrintingsPage() {
                                     <ProductPreview
                                         key={product.id}
                                         title={product.name}
-                                        imageUrl={product.image?.startsWith("/") ? `http://localhost:8080${product.image}` : product.image}
+                                        imageUrl={product.image?.startsWith("/") ? `${API_URL}${product.image}` : product.image}
                                         code={product.article}
                                         price={`${product.salePrice ?? product.basePrice} грн`}
                                         oldPrice={product.salePrice ? `${product.basePrice} грн` : undefined}

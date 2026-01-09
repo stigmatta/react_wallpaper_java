@@ -11,13 +11,14 @@ export const dynamicParams = true;
 
 export default async function PrintingPage({params}: ProductPageProps) {
     const {slug} = await params;
+    const API_URL = process.env.NEXT_PUBLIC_API_URL
 
     // 1. Fetch data in parallel
     const [productRes, typesRes] = await Promise.all([
-        fetch(`http://localhost:8080/printings/${slug}`, {
+        fetch(`${API_URL}/printings/${slug}`, {
             next: {revalidate: 3600},
         }),
-        fetch(`http://localhost:8080/catalog/product-types`, {
+        fetch(`${API_URL}/catalog/product-types`, {
             next: {revalidate: 86400},
         }),
     ]);
@@ -34,7 +35,7 @@ export default async function PrintingPage({params}: ProductPageProps) {
     let features: ExtraFeature[] = [];
     if (printingType) {
         const featuresRes = await fetch(
-            `http://localhost:8080/catalog/features/${printingType.id}`
+            `${API_URL}/catalog/features/${printingType.id}`
         );
         if (featuresRes.ok) {
             features = await featuresRes.json();
@@ -57,7 +58,7 @@ export async function generateStaticParams() {
     // Note: This means individual product pages won't be statically generated
     // and will likely result in 404s on a static export unless handled otherwise.
     try {
-        const res = await fetch("http://localhost:8080/printings?size=1000");
+        const res = await fetch(`${API_URL}/printings?size=1000`);
         if (!res.ok) return [];
         const data = await res.json();
 
