@@ -57,6 +57,8 @@ export async function generateStaticParams() {
     // We return an empty array to allow the build to succeed.
     // Note: This means individual product pages won't be statically generated
     // and will likely result in 404s on a static export unless handled otherwise.
+    const API_URL = process.env.NEXT_PUBLIC_API_URL
+
     try {
         const res = await fetch(`${API_URL}/printings?size=1000`);
         if (!res.ok) return [];
