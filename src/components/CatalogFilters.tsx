@@ -1,5 +1,5 @@
 ﻿"use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, {useEffect, useRef, useState} from "react";
 
 export interface FilterState {
     basePrice?: number;
@@ -10,7 +10,7 @@ interface CatalogFiltersProps {
     onFilterChange: (filters: FilterState) => void;
 }
 
-export default function CatalogFilters({ onFilterChange }: CatalogFiltersProps) {
+export default function CatalogFilters({onFilterChange}: CatalogFiltersProps) {
     const [priceInput, setPriceInput] = useState<string>("");
     const lastSentValue = useRef<string>("");
 
@@ -20,7 +20,7 @@ export default function CatalogFilters({ onFilterChange }: CatalogFiltersProps) 
                 lastSentValue.current = priceInput;
 
                 const numericValue = priceInput === "" ? undefined : Number(priceInput);
-                onFilterChange({ basePrice: numericValue });
+                onFilterChange({basePrice: numericValue});
             }
         }, 600);
 

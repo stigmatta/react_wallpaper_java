@@ -1,8 +1,8 @@
 "use client";
-import React, { useState } from "react";
+import React, {useState} from "react";
 import Image from "next/image";
-import { ExtraFeature, SouvenirProduct } from "@/interfaces/product";
-import { useCart } from "@/context/CartContext";
+import {ExtraFeature, SouvenirProduct} from "@/interfaces/product";
+import {useCart} from "@/context/CartContext";
 import toast from "react-hot-toast";
 import Extra from "@/components/Extra";
 import {mapProductToCartItem} from "@/utils/cartMapper";
@@ -18,8 +18,10 @@ interface SouvenirClientProps {
     productType?: ProductType;
 }
 
-const SouvenirClient: React.FC<SouvenirClientProps> = ({ product, extraFeatures, productType }) => {
-    const { addToCart } = useCart();
+const SouvenirClient: React.FC<SouvenirClientProps> = ({product, extraFeatures, productType}) => {
+    const {addToCart} = useCart();
+    const API_URL = process.env.NEXT_PUBLIC_API_URL
+
 
     const [quantity, setQuantity] = useState(1);
     const [selectedColor, setSelectedColor] = useState("Corporate");
@@ -47,7 +49,7 @@ const SouvenirClient: React.FC<SouvenirClientProps> = ({ product, extraFeatures,
                 extraCost += feature.price;
             }
         });
-        
+
         if (isGiftWrap) {
             // Assuming gift wrap has a fixed price or logic, adding 50 UAH for example if not driven by extraFeatures
             // or if it should be part of extraFeatures, the logic changes. 
@@ -88,7 +90,7 @@ const SouvenirClient: React.FC<SouvenirClientProps> = ({ product, extraFeatures,
                     <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-8">
                         <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-gray-100">
                             <Image
-                                src={product.image?.startsWith("/") ? `http://localhost:8080${product.image}` : product.image || ""}
+                                src={product.image?.startsWith("/") ? `${API_URL}${product.image}` : product.image || ""}
                                 alt={product.name}
                                 fill
                                 className="object-cover"
@@ -177,9 +179,14 @@ const SouvenirClient: React.FC<SouvenirClientProps> = ({ product, extraFeatures,
                                 <h3 className="font-bold text-lg text-navy mb-4">Кількість</h3>
                                 <div className="flex items-center gap-4">
                                     <div className="flex items-center border border-gray-200 rounded-xl bg-gray-50">
-                                        <button onClick={decrementQuantity} className="w-12 h-12 flex items-center justify-center text-xl font-bold text-gray-500 hover:bg-gray-100 rounded-l-xl transition-colors">-</button>
-                                        <div className="w-12 h-12 flex items-center justify-center text-xl font-bold text-navy bg-white border-x border-gray-200">{quantity}</div>
-                                        <button onClick={incrementQuantity} className="w-12 h-12 flex items-center justify-center text-xl font-bold text-gray-500 hover:bg-gray-100 rounded-r-xl transition-colors">+</button>
+                                        <button onClick={decrementQuantity}
+                                                className="w-12 h-12 flex items-center justify-center text-xl font-bold text-gray-500 hover:bg-gray-100 rounded-l-xl transition-colors">-
+                                        </button>
+                                        <div
+                                            className="w-12 h-12 flex items-center justify-center text-xl font-bold text-navy bg-white border-x border-gray-200">{quantity}</div>
+                                        <button onClick={incrementQuantity}
+                                                className="w-12 h-12 flex items-center justify-center text-xl font-bold text-gray-500 hover:bg-gray-100 rounded-r-xl transition-colors">+
+                                        </button>
                                     </div>
                                 </div>
                             </div>

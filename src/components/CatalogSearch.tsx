@@ -1,5 +1,5 @@
 ﻿"use client";
-import React, { useState, useEffect } from "react";
+import React, {useEffect, useState} from "react";
 
 interface CatalogSearchProps {
     /** Callback to update the search field in your filter state */

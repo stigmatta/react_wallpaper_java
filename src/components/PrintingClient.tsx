@@ -1,12 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, {useState} from "react";
 import Image from "next/image";
-import { ExtraFeature, PrintingProduct } from "@/interfaces/product";
-import { useCart } from "@/context/CartContext";
+import {ExtraFeature, PrintingProduct} from "@/interfaces/product";
+import {useCart} from "@/context/CartContext";
 import toast from "react-hot-toast";
 import Extra from "@/components/Extra";
-import { mapProductToCartItem } from "@/utils/cartMapper";
-import { ProductType } from "@/interfaces/productType";
+import {mapProductToCartItem} from "@/utils/cartMapper";
+import {ProductType} from "@/interfaces/productType";
 
 interface PrintingClientProps {
     product: PrintingProduct;
@@ -19,7 +19,8 @@ const PrintingClient: React.FC<PrintingClientProps> = ({
                                                            extraFeatures,
                                                            productType,
                                                        }) => {
-    const { addToCart } = useCart();
+    const {addToCart} = useCart();
+    const API_URL = process.env.NEXT_PUBLIC_API_URL
 
     const [quantity, setQuantity] = useState(1);
     const [selectedFeatures, setSelectedFeatures] = useState<Record<string, boolean>>({});
@@ -83,7 +84,7 @@ const PrintingClient: React.FC<PrintingClientProps> = ({
                     <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-8">
                         <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-gray-100">
                             <Image
-                                src={product.image?.startsWith("/") ? `http://localhost:8080${product.image}` : product.image || ""}
+                                src={product.image?.startsWith("/") ? `${API_URL}${product.image}` : product.image || ""}
                                 alt={product.name}
                                 fill
                                 className="object-cover"
@@ -187,9 +188,14 @@ const PrintingClient: React.FC<PrintingClientProps> = ({
                                 <h3 className="font-bold text-lg text-navy mb-4">Кількість</h3>
                                 <div className="flex items-center gap-4">
                                     <div className="flex items-center border border-gray-200 rounded-xl bg-gray-50">
-                                        <button onClick={decrementQuantity} className="w-12 h-12 flex items-center justify-center text-xl font-bold text-gray-500 hover:bg-gray-100 rounded-l-xl transition-colors">-</button>
-                                        <div className="w-12 h-12 flex items-center justify-center text-xl font-bold text-navy bg-white border-x border-gray-200">{quantity}</div>
-                                        <button onClick={incrementQuantity} className="w-12 h-12 flex items-center justify-center text-xl font-bold text-gray-500 hover:bg-gray-100 rounded-r-xl transition-colors">+</button>
+                                        <button onClick={decrementQuantity}
+                                                className="w-12 h-12 flex items-center justify-center text-xl font-bold text-gray-500 hover:bg-gray-100 rounded-l-xl transition-colors">-
+                                        </button>
+                                        <div
+                                            className="w-12 h-12 flex items-center justify-center text-xl font-bold text-navy bg-white border-x border-gray-200">{quantity}</div>
+                                        <button onClick={incrementQuantity}
+                                                className="w-12 h-12 flex items-center justify-center text-xl font-bold text-gray-500 hover:bg-gray-100 rounded-r-xl transition-colors">+
+                                        </button>
                                     </div>
                                 </div>
                             </div>

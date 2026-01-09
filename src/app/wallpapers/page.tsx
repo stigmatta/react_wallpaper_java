@@ -1,16 +1,18 @@
 "use client";
 import CategorySidebar from "@/components/CategorySidebar";
-import { Pagination } from "@mui/material";
+import {Pagination} from "@mui/material";
 import ProductPreview from "@/components/ProductPreview";
-import React, { useEffect, useState } from "react";
-import { WallpaperProduct } from "@/interfaces/product";
+import React, {useEffect, useState} from "react";
+import {WallpaperProduct} from "@/interfaces/product";
 import CatalogSearch from "@/components/CatalogSearch";
-import CatalogFilters, { FilterState } from "@/components/CatalogFilters"; // Import the filter component
+import CatalogFilters, {FilterState} from "@/components/CatalogFilters"; // Import the filter component
 
 export const dynamicParams = true;
 
 
 export default function WallpapersPage() {
+    const API_URL = process.env.NEXT_PUBLIC_API_URL
+
     const [categories, setCategories] = useState([]);
     const [products, setProducts] = useState<WallpaperProduct[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
@@ -41,7 +43,7 @@ export default function WallpapersPage() {
             params.append("basePrice", extraFilters.basePrice.toString());
         }
 
-        fetch(`http://localhost:8080/wallpapers?${params.toString()}`)
+        fetch(`${API_URL}/wallpapers?${params.toString()}`)
             .then((res) => {
                 if (!res.ok) throw new Error("Помилка завантаження");
                 return res.json();
@@ -64,11 +66,11 @@ export default function WallpapersPage() {
             })
             .finally(() => setLoading(false));
 
-    }, [page, selectedCategoryId, searchTerm, extraFilters, categories.length]);
+    }, [page, selectedCategoryId, searchTerm, extraFilters, categories.length, API_URL]);
 
     const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
         setPage(value);
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        window.scrollTo({top: 0, behavior: "smooth"});
     };
 
     const handleCategoryClick = (categoryId: string) => {
@@ -90,12 +92,12 @@ export default function WallpapersPage() {
     }, []);
 
     const paginationSx = {
-        "& .MuiPaginationItem-root": { color: "#2F4157", fontSize: "1rem" },
-        "& .Mui-selected": { backgroundColor: "#F5F3F0", color: "#2F4157" },
+        "& .MuiPaginationItem-root": {color: "#2F4157", fontSize: "1rem"},
+        "& .Mui-selected": {backgroundColor: "#F5F3F0", color: "#2F4157"},
         "& .MuiPaginationItem-previousNext": {
             backgroundColor: "#577C8E",
             color: "#fff",
-            "&:hover": { backgroundColor: "#fff", color: "#577C8E", border: "2px solid #577C8E" },
+            "&:hover": {backgroundColor: "#fff", color: "#577C8E", border: "2px solid #577C8E"},
         },
     };
 
@@ -154,7 +156,7 @@ export default function WallpapersPage() {
                             {products.length > 0 ? (
                                 products.map((product, idx) => {
                                     const imageUrl = product.image?.startsWith("/")
-                                        ? `http://localhost:8080${product.image}`
+                                        ? `${API_URL}${product.image}`
                                         : product.image;
 
                                     return (

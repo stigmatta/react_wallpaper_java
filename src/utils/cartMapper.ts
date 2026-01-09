@@ -1,4 +1,4 @@
-﻿import {ExtraFeature, SouvenirProduct, WallpaperProduct, PrintingProduct} from "@/interfaces/product";
+﻿import {ExtraFeature, PrintingProduct, SouvenirProduct, WallpaperProduct} from "@/interfaces/product";
 import {ProductType} from "@/interfaces/productType";
 
 interface CartMapperParams {
@@ -27,8 +27,10 @@ export const mapProductToCartItem = ({
             label: f.name ?? "",
             price: f.price,
         }));
+    const API_URL = process.env.NEXT_PUBLIC_API_URL
 
-    const baseUrl = "http://localhost:8080";
+
+    const baseUrl = `${API_URL}`;
     const imageUrl = product.image?.startsWith("/")
         ? `${baseUrl}${product.image}`
         : product.image;

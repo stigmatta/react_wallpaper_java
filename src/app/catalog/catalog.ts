@@ -1,7 +1,10 @@
-﻿import { ProductType } from "@/interfaces/productType";
+﻿import {ProductType} from "@/interfaces/productType";
 
 export async function getProductTypes(): Promise<ProductType[]> {
-    const res = await fetch("http://localhost:8080/catalog/product-types", {
+    const API_URL = process.env.NEXT_PUBLIC_API_URL
+
+
+    const res = await fetch(`${API_URL}/catalog/product-types`, {
         next: {
             revalidate: 86400,
             tags: ['product-types']

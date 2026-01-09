@@ -2,5 +2,6 @@
     name?: string;
     categoryId?: string;
     basePrice?: number;
-    [key: string]: string | number | undefined | string[]; 
+
+    [key: string]: string | number | undefined | string[];
 }

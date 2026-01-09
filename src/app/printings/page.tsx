@@ -1,12 +1,12 @@
 "use client";
 import CategorySidebar from "@/components/CategorySidebar";
-import { Pagination } from "@mui/material";
+import {Pagination} from "@mui/material";
 import ProductPreview from "@/components/ProductPreview";
-import React, { useCallback, useEffect, useState } from "react";
+import React, {useCallback, useEffect, useState} from "react";
 // Змінено інтерфейс на PrintingProduct або загальний Product для точності
-import { Category, PrintingProduct } from "@/interfaces/product";
+import {Category, PrintingProduct} from "@/interfaces/product";
 import CatalogSearch from "@/components/CatalogSearch";
-import CatalogFilters, { FilterState } from "@/components/CatalogFilters";
+import CatalogFilters, {FilterState} from "@/components/CatalogFilters";
 
 export const dynamicParams = true;
 
@@ -62,7 +62,7 @@ export default function PrintingsPage() {
     const handlePageChange = useCallback(
         (event: React.ChangeEvent<unknown>, value: number) => {
             setPage(value);
-            window.scrollTo({ top: 0, behavior: "smooth" });
+            window.scrollTo({top: 0, behavior: "smooth"});
         },
         []
     );
@@ -112,7 +112,7 @@ export default function PrintingsPage() {
                     activeCategory={selectedCategory || undefined}
                     onCategoryClick={handleCategoryClick}
                 />
-                <CatalogFilters type="PRINTING" onFilterChange={handleFilterUpdate} />
+                <CatalogFilters type="PRINTING" onFilterChange={handleFilterUpdate}/>
             </aside>
 
             <div className="flex flex-col w-full lg:ml-2">

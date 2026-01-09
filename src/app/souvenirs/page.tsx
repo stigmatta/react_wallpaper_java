@@ -1,6 +1,6 @@
 "use client";
 import CategorySidebar from "@/components/CategorySidebar";
-import { Pagination } from "@mui/material";
+import {Pagination} from "@mui/material";
 import ProductPreview from "@/components/ProductPreview";
 import React, {useCallback, useEffect, useState} from "react";
 import {Category, WallpaperProduct} from "@/interfaces/product";
@@ -10,6 +10,7 @@ import CatalogFilters, {FilterState} from "@/components/CatalogFilters"; // Reus
 export const dynamicParams = true;
 
 export default function SouvenirsPage() {
+    const API_URL = process.env.NEXT_PUBLIC_API_URL
     const [products, setProducts] = useState<WallpaperProduct[]>([]);
     const [categories, setCategories] = useState<Category[]>([]);
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -37,7 +38,7 @@ export default function SouvenirsPage() {
             params.append("basePrice", extraFilters.basePrice.toString());
         }
 
-        fetch(`http://localhost:8080/souvenirs?${params.toString()}`)
+        fetch(`${API_URL}/souvenirs?${params.toString()}`)
             .then((res) => {
                 if (!res.ok) throw new Error("Помилка завантаження");
                 return res.json();
@@ -60,7 +61,7 @@ export default function SouvenirsPage() {
 
     const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
         setPage(value);
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        window.scrollTo({top: 0, behavior: "smooth"});
     };
 
     const handleCategoryClick = (categoryId: string) => {
@@ -167,7 +168,7 @@ export default function SouvenirsPage() {
                                 {products.length > 0 ? (
                                     products.map((product, idx) => {
                                         const imageUrl = product.image?.startsWith("/")
-                                            ? `http://localhost:8080${product.image}`
+                                            ? `${API_URL}{product.image}`
                                             : product.image;
 
                                         // Logic for effective price display

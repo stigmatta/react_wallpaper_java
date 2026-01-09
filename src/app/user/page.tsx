@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { useAuth } from "@/context/AuthContext";
-import { useRouter } from "next/navigation";
+import React, {useEffect, useState} from "react";
+import {useAuth} from "@/context/AuthContext";
+import {useRouter} from "next/navigation";
 import Link from "next/link";
-import { Order, OrderDTO } from "@/interfaces/order";
+import {Order, OrderDTO} from "@/interfaces/order";
 
 const UserPage = () => {
-    const { user, isAuthenticated, logout } = useAuth();
+    const {user, isAuthenticated, logout} = useAuth();
     const router = useRouter();
     const [orders, setOrders] = useState<Order[]>([]);
     const [loading, setLoading] = useState(true);
@@ -81,7 +81,8 @@ const UserPage = () => {
                     <div className="w-full lg:w-1/3 xl:w-1/4">
                         <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 sticky top-24">
                             <div className="flex flex-col items-center mb-6">
-                                <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-4 text-3xl font-bold text-navy">
+                                <div
+                                    className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-4 text-3xl font-bold text-navy">
                                     {user.username.charAt(0).toUpperCase()}
                                 </div>
                                 <h2 className="text-xl font-bold text-navy">{user.username}</h2>
@@ -109,18 +110,22 @@ const UserPage = () => {
                         ) : orders.length === 0 ? (
                             <div className="bg-white rounded-2xl p-12 text-center border border-gray-100 shadow-sm">
                                 <div className="text-gray-400 text-xl mb-6">У вас ще немає замовлень</div>
-                                <Link href="/printings" className="inline-block bg-teal text-white font-bold rounded-xl px-8 py-3 hover:bg-navy">
+                                <Link href="/printings"
+                                      className="inline-block bg-teal text-white font-bold rounded-xl px-8 py-3 hover:bg-navy">
                                     До каталогу
                                 </Link>
                             </div>
                         ) : (
                             <div className="space-y-6">
                                 {orders.map((order) => (
-                                    <div key={order.id} className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                                        <div className="flex justify-between items-start mb-6 border-b border-gray-50 pb-4">
+                                    <div key={order.id}
+                                         className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                                        <div
+                                            className="flex justify-between items-start mb-6 border-b border-gray-50 pb-4">
                                             <div>
                                                 <div className="text-sm text-gray-500 mb-1">Замовлення №</div>
-                                                <div className="text-lg font-bold text-navy">#{order.id.slice(0, 8)}</div>
+                                                <div
+                                                    className="text-lg font-bold text-navy">#{order.id.slice(0, 8)}</div>
                                             </div>
                                             <div className="text-sm text-gray-500">
                                                 {new Date(order.orderDate).toLocaleString("uk-UA")}
