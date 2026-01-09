@@ -16,7 +16,7 @@
     "@mui/icons-material": "^7.3.2",
     "@mui/material": "^7.3.2",
     "keen-slider": "^6.8.6",
-    "next": "15.4.5",
+    "next": "15.4.10",
     "novaposhta": "^1.1.1",
     "react": "19.1.0",
     "react-animated-heart": "^0.0.8",
